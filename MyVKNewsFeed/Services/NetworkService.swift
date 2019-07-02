@@ -9,31 +9,40 @@
 import Foundation
 
 protocol Networking {
-  func request(path: String, params: [String: String], completion: (Data?, Error?) -> Void)
+  func request(path: String, params: [String: String], completion: @escaping (Data?, Error?) -> Void)
 }
 
-final class NetworkService {
-  
+final class NetworkService: Networking {
+
   private let authService: AuthService
   init(authService: AuthService = AppDelegate.shared().authService) {
     self.authService = authService
   }
   
-  
-  func getFeed() {
-
+  func request(path: String, params: [String : String], completion: @escaping (Data?, Error?) -> Void) {
     
     guard let token = authService.token else { return }
-    let params = ["filters": "post,photo"]
     var allParams = params
     allParams["access_token"] = token
     allParams["v"] = Api.version
-
-    let url = self.createURL(from: Api.newsFeed, params: allParams)
+    let url = self.createURL(from: path, params: allParams)
     
+    let request = URLRequest(url: url)
+    let task = createDataTask(from: request, completion: completion)
+    task.resume()
     print(url)
-    
   }
+  
+  
+  private func createDataTask(from request: URLRequest, completion: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask {
+    
+    return URLSession.shared.dataTask(with: request, completionHandler: { (data, respons, error) in
+      DispatchQueue.main.async {
+        completion(data, error)
+      }
+    })
+  }
+  
   
   private func createURL(from path: String, params: [String: String]) -> URL {
     var componetns = URLComponents()
@@ -45,6 +54,5 @@ final class NetworkService {
     
     return componetns.url!
   }
-  
   
 }

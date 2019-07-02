@@ -25,9 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.authService = AuthService()
     authService.delegate = self
     window = UIWindow()
+    
     let loginVC: LoginViewController = LoginViewController.loadFromStoryboard()
     window?.rootViewController = loginVC
     window?.makeKeyAndVisible()
+    
     return true
   }
 
