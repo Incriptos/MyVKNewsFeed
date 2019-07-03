@@ -38,8 +38,6 @@ final class NetworkService: Networking {
     return URLSession.shared.dataTask(with: request, completionHandler: { (data, respons, error) in
       DispatchQueue.main.async {
         completion(data, error)
-        print(data)
-        
       }
     })
   }

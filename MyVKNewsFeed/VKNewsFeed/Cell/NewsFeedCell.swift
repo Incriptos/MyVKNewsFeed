@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol FeedCellViewModel {
-  var iconUrlString: String { get }
+  var iconUrlString: String  { get }
   var name:          String  { get }
   var date:          String  { get }
   var text:          String? { get }
@@ -22,7 +22,7 @@ protocol FeedCellViewModel {
 
 class NewsFeedCell: UITableViewCell {
   
-  @IBOutlet weak var iconImageView: UIImageView!
+  @IBOutlet weak var iconImageView: WebImageView!
   @IBOutlet weak var nameLabel:     UILabel!
   @IBOutlet weak var dateLabel:     UILabel!
   @IBOutlet weak var postLabel:     UILabel!
@@ -39,7 +39,8 @@ class NewsFeedCell: UITableViewCell {
   }
   
   func set(viewModel: FeedCellViewModel) {
-    nameLabel.text     = viewModel.text
+    iconImageView.setImageFromURL(imageURL: viewModel.iconUrlString)
+    nameLabel.text     = viewModel.name
     dateLabel.text     = viewModel.date
     postLabel.text     = viewModel.text
     likesLabel.text    = viewModel.likes

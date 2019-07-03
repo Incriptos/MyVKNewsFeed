@@ -27,6 +27,9 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
   
     case .getNewsFeed:
       fetcher.getFeed { [weak self] (feedRespons) in
+      
+        
+        
         guard let feedRespons = feedRespons else { return }
         self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentNewsFeed(feed: feedRespons))
       }
