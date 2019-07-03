@@ -16,9 +16,10 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
 
   @IBOutlet weak var tableView: UITableView!
   
-  
   var interactor: NewsFeedBusinessLogic?
   var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
+  
+  private var feedViewModel = FeedViewModel.init(cells: [])
   
   // MARK: Setup
   
@@ -45,49 +46,47 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     setup()
     
-    tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
+    tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil),
+                       forCellReuseIdentifier: NewsFeedCell.reuseId)
     
+    interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
   }
   
   func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
     
     switch viewModel {
-  
-    case .some:
-      print(".some VC")
-    case .displayNewsFeed:
-      print(".displayNewsFeed")
-      
+    case .displayNewsFeed(let feedViewModel):
+      self.feedViewModel = feedViewModel
+      tableView.reloadData()
     }
     
   }
   
 }
 
+// MARK: - Table View Delegate
 
 extension NewsFeedViewController: UITableViewDelegate {
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("Selected row")
-    interactor?.makeRequest(request: .getFeed)
-    
-  }
-
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 220
   }
   
 }
 
+// MARK: - Table View DataSource
+
 extension NewsFeedViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 7
+    return feedViewModel.cells.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId, for: indexPath) as! NewsFeedCell
     
+    let cellViewModel = feedViewModel.cells[indexPath.row]
+    cell.set(viewModel: cellViewModel)
     
     return cell
   }

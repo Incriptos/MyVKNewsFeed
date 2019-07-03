@@ -9,12 +9,11 @@
 import Foundation
 
 struct FeedResponseWrapped: Decodable {
-  let respons: FeedResponse
+  let response: FeedResponse
 }
 
 struct FeedResponse: Decodable {
   var items: [FeedItem]
-  
 }
 
 struct FeedItem: Decodable {
@@ -26,7 +25,6 @@ struct FeedItem: Decodable {
   let likes: CountableItem?
   let reposts: CountableItem?
   let views: CountableItem?
-
 }
 
 struct CountableItem: Decodable {
