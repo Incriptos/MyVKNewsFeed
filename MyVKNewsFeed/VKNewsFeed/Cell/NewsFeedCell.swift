@@ -18,11 +18,23 @@ protocol FeedCellViewModel {
   var comments:      String? { get }
   var reposts:       String? { get }
   var views:         String? { get }
+  var photoAttachment: FeedCellPhotoAttachmentViewModel? { get }
+}
+
+protocol FeedCellPhotoAttachmentViewModel {
+  var photoSrcString: String? { get }
+  var photoHeight:    Int     { get }
+  var photoWidth:     Int     { get }
 }
 
 class NewsFeedCell: UITableViewCell {
   
-  @IBOutlet weak var iconImageView: WebImageView!
+  @IBOutlet weak var iconImageView: WebImageView! {
+    didSet {
+      iconImageView.layer.cornerRadius = iconImageView.frame.width / 2
+      iconImageView.clipsToBounds      = true
+    }
+  }
   @IBOutlet weak var nameLabel:     UILabel!
   @IBOutlet weak var dateLabel:     UILabel!
   @IBOutlet weak var postLabel:     UILabel!
@@ -30,6 +42,7 @@ class NewsFeedCell: UITableViewCell {
   @IBOutlet weak var repostsLabel:  UILabel!
   @IBOutlet weak var commentsLabel: UILabel!
   @IBOutlet weak var viewsLabel:    UILabel!
+  @IBOutlet weak var postImageView: WebImageView!
   
   static let reuseId = "NewsFeedCell"
   
@@ -47,6 +60,13 @@ class NewsFeedCell: UITableViewCell {
     commentsLabel.text = viewModel.comments
     repostsLabel.text  = viewModel.reposts
     viewsLabel.text    = viewModel.views
+    
+    if let photoAttachment = viewModel.photoAttachment {
+      postImageView.setImageFromURL(imageURL: photoAttachment.photoSrcString)
+      postImageView.isHidden = false
+    } else {
+      postImageView.isHidden = true
+    }
     
   }
   

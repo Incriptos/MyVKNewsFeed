@@ -126,13 +126,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="МНОГО ТЕКСТА" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVG-lV-gib">
-                        <rect key="frame" x="10" y="67" width="395" height="100"/>
+                        <rect key="frame" x="10" y="67" width="395" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XQv-GD-xbF" customClass="WebImageView" customModule="MyVKNewsFeed" customModuleProvider="target">
+                        <rect key="frame" x="10" y="117" width="395" height="47"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -141,6 +145,7 @@
                 <outlet property="iconImageView" destination="PhW-QZ-Cm3" id="uS7-t0-6ki"/>
                 <outlet property="likesLabel" destination="lOL-6T-yyY" id="c3m-Jk-B76"/>
                 <outlet property="nameLabel" destination="9Ud-vx-APc" id="PjH-91-yvr"/>
+                <outlet property="postImageView" destination="XQv-GD-xbF" id="QR6-6J-orR"/>
                 <outlet property="postLabel" destination="iVG-lV-gib" id="jQa-bJ-73f"/>
                 <outlet property="repostsLabel" destination="JII-3m-AFW" id="Xj4-Mb-UzT"/>
                 <outlet property="viewsLabel" destination="Ocs-DB-yF1" id="3go-DL-JJ6"/>
