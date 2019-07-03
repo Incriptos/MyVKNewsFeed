@@ -16,6 +16,7 @@ class WebImageView: UIImageView {
     
     guard  let url = URL(string: imageURL) else { return }
     
+    // take images from cache.
     if let cachedRespons = URLCache.shared.cachedResponse(for: URLRequest(url: url)) {
       self.image = UIImage(data: cachedRespons.data)
       return
@@ -33,6 +34,7 @@ class WebImageView: UIImageView {
     dataTask.resume()
   }
   
+  // func for cache images.
   private func handleLoadedImage(data: Data, respons: URLResponse) {
     guard let responsURL = respons.url else { return }
     let cachedRespons = CachedURLResponse(response: respons, data: data)
