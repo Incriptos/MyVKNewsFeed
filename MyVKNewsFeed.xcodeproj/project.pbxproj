@@ -70,6 +70,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8365972A22CCE59B00D3F4A3 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				83FCFDC722CA39780016DCB1 /* LoginViewController.swift */,
+				83FCFDC922CA39890016DCB1 /* LoginViewController.storyboard */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		8365972B22CCE5C800D3F4A3 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				83FCFDAE22CA20C90016DCB1 /* AppDelegate.swift */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
 		83A89A6722CBCF9D00EB77B0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -79,7 +96,7 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		83CA2FC422CA99F300DB9BCF /* NewsFeed */ = {
+		83CA2FC422CA99F300DB9BCF /* VKNewsFeed */ = {
 			isa = PBXGroup;
 			children = (
 				83A89A6722CBCF9D00EB77B0 /* Cell */,
@@ -91,13 +108,14 @@
 				83266D9022CA9B4900FCD260 /* NewsFeedWorker.swift */,
 				83266D9122CA9B4900FCD260 /* NewsFeedRouter.swift */,
 			);
-			path = NewsFeed;
+			path = VKNewsFeed;
 			sourceTree = "<group>";
 		};
 		83FCFDA222CA20C90016DCB1 = {
 			isa = PBXGroup;
 			children = (
 				83FCFDAD22CA20C90016DCB1 /* MyVKNewsFeed */,
+				83FCFDB722CA20CA0016DCB1 /* LaunchScreen.storyboard */,
 				83FCFDAC22CA20C90016DCB1 /* Products */,
 				83FCFDC022CA33520016DCB1 /* Frameworks */,
 			);
@@ -114,14 +132,11 @@
 		83FCFDAD22CA20C90016DCB1 /* MyVKNewsFeed */ = {
 			isa = PBXGroup;
 			children = (
-				83FCFDAE22CA20C90016DCB1 /* AppDelegate.swift */,
-				83FCFDDB22CA8E4A0016DCB1 /* Models */,
+				8365972B22CCE5C800D3F4A3 /* main */,
 				83FCFDC622CA34D90016DCB1 /* Services */,
-				83FCFDB722CA20CA0016DCB1 /* LaunchScreen.storyboard */,
-				83CA2FC422CA99F300DB9BCF /* NewsFeed */,
+				8365972A22CCE59B00D3F4A3 /* Auth */,
+				83CA2FC422CA99F300DB9BCF /* VKNewsFeed */,
 				83FCFDD222CA4C110016DCB1 /* SupportFiles */,
-				83FCFDC722CA39780016DCB1 /* LoginViewController.swift */,
-				83FCFDC922CA39890016DCB1 /* LoginViewController.storyboard */,
 				83FCFDD122CA4BFD0016DCB1 /* Extensions */,
 			);
 			path = MyVKNewsFeed;
@@ -138,6 +153,7 @@
 		83FCFDC622CA34D90016DCB1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				83FCFDDB22CA8E4A0016DCB1 /* Models */,
 				8316FEB522CA901300F22732 /* NetworkDataFetcher.swift */,
 				83FCFDC422CA34CD0016DCB1 /* AuthService.swift */,
 				83FCFDD322CA50410016DCB1 /* NetworkService.swift */,
