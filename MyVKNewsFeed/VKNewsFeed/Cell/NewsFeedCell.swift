@@ -38,6 +38,12 @@ class NewsFeedCell: UITableViewCell {
   @IBOutlet weak var nameLabel:     UILabel!
   @IBOutlet weak var dateLabel:     UILabel!
   @IBOutlet weak var postLabel:     UILabel!
+  @IBOutlet weak var cardView:      UIView! {
+    didSet {
+      cardView.layer.cornerRadius = 10
+      cardView.clipsToBounds = true
+    }
+  }
   @IBOutlet weak var likesLabel:    UILabel!
   @IBOutlet weak var repostsLabel:  UILabel!
   @IBOutlet weak var commentsLabel: UILabel!
@@ -48,7 +54,8 @@ class NewsFeedCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
+    backgroundColor = .clear
+    selectionStyle = .none
   }
   
   func set(viewModel: FeedCellViewModel) {
