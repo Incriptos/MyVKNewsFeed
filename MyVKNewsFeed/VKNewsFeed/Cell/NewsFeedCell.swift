@@ -19,6 +19,12 @@ protocol FeedCellViewModel {
   var reposts:       String? { get }
   var views:         String? { get }
   var photoAttachment: FeedCellPhotoAttachmentViewModel? { get }
+  var sizes: FeedCellSizes   { get }
+}
+
+protocol FeedCellSizes {
+  var postLabelFrame: CGRect  { get }
+  var attachmentFrame: CGRect { get }
 }
 
 protocol FeedCellPhotoAttachmentViewModel {
@@ -59,14 +65,19 @@ class NewsFeedCell: UITableViewCell {
   }
   
   func set(viewModel: FeedCellViewModel) {
+    
     iconImageView.setImageFromURL(imageURL: viewModel.iconUrlString)
-    nameLabel.text     = viewModel.name
-    dateLabel.text     = viewModel.date
-    postLabel.text     = viewModel.text
-    likesLabel.text    = viewModel.likes
-    commentsLabel.text = viewModel.comments
-    repostsLabel.text  = viewModel.reposts
-    viewsLabel.text    = viewModel.views
+    
+    nameLabel.text      = viewModel.name
+    dateLabel.text      = viewModel.date
+    postLabel.text      = viewModel.text
+    likesLabel.text     = viewModel.likes
+    commentsLabel.text  = viewModel.comments
+    repostsLabel.text   = viewModel.reposts
+    viewsLabel.text     = viewModel.views
+    
+    postLabel.frame     = viewModel.sizes.postLabelFrame
+    postImageView.frame = viewModel.sizes.attachmentFrame
     
     if let photoAttachment = viewModel.photoAttachment {
       postImageView.setImageFromURL(imageURL: photoAttachment.photoSrcString)

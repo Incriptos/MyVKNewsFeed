@@ -16,6 +16,8 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
   
   weak var viewController: NewsFeedDisplayLogic?
   
+  var cellLayoutCalculator: FeedCellLayoutCalculatorProtocol = FeedCellLayoutCalculator()
+
   let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "ua_UA")
@@ -47,6 +49,8 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
     let date = Date(timeIntervalSince1970: feedItem.date)
     let dateTitle = dateFormatter.string(from: date)
     
+    let sizes = cellLayoutCalculator.sizesForCell(postText: feedItem.text, photoAttachment: photoAttachment)
+    
     return FeedViewModel.Cell.init( photoAttachment: photoAttachment,
                                     iconUrlString: profile.photo,
                                     name: profile.name,
@@ -55,7 +59,8 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                     likes: String(feedItem.likes?.count ?? 0),
                                     comments: String(feedItem.comments?.count ?? 0),
                                     reposts: String(feedItem.reposts?.count ?? 0),
-                                    views: String(feedItem.views?.count ?? 0))
+                                    views: String(feedItem.views?.count ?? 0),
+                                    sizes: sizes)
   }
   
   private func profile(for sourceId: Int, profiles: [Profile], groups: [Group]) -> ProfileRepresentable {
