@@ -14,7 +14,9 @@ class WebImageView: UIImageView {
   
   func setImageFromURL(imageURL: String?) {
     
-    guard let imageURL = imageURL, let url = URL(string: imageURL) else { return }
+    guard let imageURL = imageURL, let url = URL(string: imageURL) else {
+      self.image = nil
+      return }
     
     // take images from cache.
     if let cachedRespons = URLCache.shared.cachedResponse(for: URLRequest(url: url)) {

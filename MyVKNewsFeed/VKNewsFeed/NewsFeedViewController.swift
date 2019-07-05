@@ -71,7 +71,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
 extension NewsFeedViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 220
+    let cellViewModel = feedViewModel.cells[indexPath.row]
+    return cellViewModel.sizes.totalHeight
   }
   
 }
