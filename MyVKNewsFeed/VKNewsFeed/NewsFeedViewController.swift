@@ -78,8 +78,8 @@ extension NewsFeedViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let cellViewModel = feedViewModel.cells[indexPath.row]
-    //return cellViewModel.sizes.totalHeight
-    return 220
+    return cellViewModel.sizes.totalHeight
+   
   }
   
 }
@@ -94,14 +94,14 @@ extension NewsFeedViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-//    let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId, for: indexPath) as! NewsFeedCell
-//    let cellViewModel = feedViewModel.cells[indexPath.row]
-//
-//    cell.set(viewModel: cellViewModel)
+    // Celll from Xib
+//   let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId, for: indexPath) as! NewsFeedCell
     
+    // Cell from Code
     let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCodeCell.reuseId, for: indexPath) as! NewsFeedCodeCell
     
-    cell.textLabel?.text = "inde \(indexPath.row)"
+    let cellViewModel = feedViewModel.cells[indexPath.row]
+    cell.set(viewModel: cellViewModel)
     
     return cell
   }

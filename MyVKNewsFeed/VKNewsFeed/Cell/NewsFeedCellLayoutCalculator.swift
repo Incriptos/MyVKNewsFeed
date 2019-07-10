@@ -20,13 +20,6 @@ struct Sizes: FeedCellSizes {
   var totalHeight:     CGFloat
 }
 
-struct Constants {
-  static let cardInserts = UIEdgeInsets(top: 0, left: 5, bottom: 10, right: 5)
-  static let topViewHeight: CGFloat = 50
-  static let postLabelInserts = UIEdgeInsets(top: 5 + Constants.topViewHeight + 5, left: 10, bottom: 7, right: 10)
-  static let postLabelFont = UIFont.systemFont(ofSize: 15)
-  static let bottomViewHeight: CGFloat = 50
-}
 
 final class FeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
   
