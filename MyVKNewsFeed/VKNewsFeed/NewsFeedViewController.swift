@@ -46,8 +46,14 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     setup()
     
+    // cell create from Xib file
     tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil),
                        forCellReuseIdentifier: NewsFeedCell.reuseId)
+    
+    // cell create from Code
+    tableView.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
+    
+    
     tableView.separatorStyle = .none
     tableView.backgroundColor = .clear
     view.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
@@ -72,7 +78,8 @@ extension NewsFeedViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let cellViewModel = feedViewModel.cells[indexPath.row]
-    return cellViewModel.sizes.totalHeight
+    //return cellViewModel.sizes.totalHeight
+    return 220
   }
   
 }
@@ -86,10 +93,15 @@ extension NewsFeedViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId, for: indexPath) as! NewsFeedCell
     
-    let cellViewModel = feedViewModel.cells[indexPath.row]
-    cell.set(viewModel: cellViewModel)
+//    let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId, for: indexPath) as! NewsFeedCell
+//    let cellViewModel = feedViewModel.cells[indexPath.row]
+//
+//    cell.set(viewModel: cellViewModel)
+    
+    let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCodeCell.reuseId, for: indexPath) as! NewsFeedCodeCell
+    
+    cell.textLabel?.text = "inde \(indexPath.row)"
     
     return cell
   }
