@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830D7C0022D679D1008E5750 /* NewsFeedCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D7BFF22D679D1008E5750 /* NewsFeedCodeCell.swift */; };
 		8316FEB622CA901300F22732 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316FEB522CA901300F22732 /* NetworkDataFetcher.swift */; };
 		83266D9622CA9B4900FCD260 /* NewsFeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83266D8F22CA9B4900FCD260 /* NewsFeedPresenter.swift */; };
 		83266D9722CA9B4900FCD260 /* NewsFeedWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83266D9022CA9B4900FCD260 /* NewsFeedWorker.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		830D7BFF22D679D1008E5750 /* NewsFeedCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCodeCell.swift; sourceTree = "<group>"; };
 		8316FEB522CA901300F22732 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		83266D8F22CA9B4900FCD260 /* NewsFeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedPresenter.swift; sourceTree = "<group>"; };
 		83266D9022CA9B4900FCD260 /* NewsFeedWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedWorker.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				83A89A6822CBCFB000EB77B0 /* NewsFeedCell.swift */,
 				83A89A6A22CBD05E00EB77B0 /* NewsFeedCell.xib */,
 				8365972E22CE5CF600D3F4A3 /* NewsFeedCellLayoutCalculator.swift */,
+				830D7BFF22D679D1008E5750 /* NewsFeedCodeCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			files = (
 				83FCFDDA22CA71D80016DCB1 /* FeedResponse.swift in Sources */,
 				83266D9622CA9B4900FCD260 /* NewsFeedPresenter.swift in Sources */,
+				830D7C0022D679D1008E5750 /* NewsFeedCodeCell.swift in Sources */,
 				83FCFDC822CA39780016DCB1 /* LoginViewController.swift in Sources */,
 				83FCFDAF22CA20C90016DCB1 /* AppDelegate.swift in Sources */,
 				83266D9B22CA9B4900FCD260 /* NewsFeedInteractor.swift in Sources */,
