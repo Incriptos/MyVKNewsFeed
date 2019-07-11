@@ -48,7 +48,7 @@ final class NewsFeedCodeCell: UITableViewCell {
   
   let bottomView: UIView = {
     let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
+    //view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
@@ -104,29 +104,99 @@ final class NewsFeedCodeCell: UITableViewCell {
     return view
   }()
   
+  // Fours layer on Bottom View
+  var likesImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.image = UIImage(named: "like")
+    return imageView
+  }()
+  
+  var commentsImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.image = UIImage(named: "comment")
+    return imageView
+  }()
+  
+  var repostsImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.image = UIImage(named: "repost")
+    return imageView
+  }()
+  
+  var viewsImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.image = UIImage(named: "views")
+    return imageView
+  }()
+  
+  var likesLabel: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+    label.lineBreakMode = NSLineBreakMode.byClipping
+    return label
+  }()
+  
+  var commentsLabel: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+    label.lineBreakMode = NSLineBreakMode.byClipping
+    return label
+  }()
+  
+  var repostsLabel: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+    label.lineBreakMode = NSLineBreakMode.byClipping
+    return label
+  }()
+  
+  var viewsLabel: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+    label.lineBreakMode = NSLineBreakMode.byClipping
+    return label
+  }()
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-    addFirstLayer()  // First Layer
-    addSecondLayer() // Second Layer
-    addThirdLayerOnTopView() // Third Layer on TopView
+    backgroundColor = .clear
+    selectionStyle = .none
+    
+    addAllLayers()
   }
+  
   
   func set(viewModel: FeedCellViewModel) {
     
-//    iconImageView.setImageFromURL(imageURL: viewModel.iconUrlString)
-//
-//    nameLabel.text      = viewModel.name
-//    dateLabel.text      = viewModel.date
-//    postLabel.text      = viewModel.text
+    iconImageView.setImageFromURL(imageURL: viewModel.iconUrlString)
+    
+    nameLabel.text      = viewModel.name
+    dateLabel.text      = viewModel.date
+    postLabel.text      = viewModel.text
+    likesLabel.text     = viewModel.likes
+    commentsLabel.text  = viewModel.comments
+    repostsLabel.text   = viewModel.reposts
+    viewsLabel.text     = viewModel.views
     
     postLabel.frame     = viewModel.sizes.postLabelFrame
     postImageView.frame = viewModel.sizes.attachmentFrame
     bottomView.frame    = viewModel.sizes.bottomView
     
     if let photoAttachment = viewModel.photoAttachment {
-     // postImageView.setImageFromURL(imageURL: photoAttachment.photoSrcString)
+      postImageView.setImageFromURL(imageURL: photoAttachment.photoSrcString)
       postImageView.isHidden = false
     } else {
       postImageView.isHidden = true
@@ -134,7 +204,15 @@ final class NewsFeedCodeCell: UITableViewCell {
     
   }
   
-  func addFirstLayer() {
+  private func addAllLayers() {
+    addFirstLayer()  // First Layer
+    addSecondLayer() // Second Layer
+    addThirdLayerOnTopView() // Third Layer on TopView
+    addThirdLayerOnBottomView() // Third layer on BottomView
+    addFoursLayerOnBottomView() // Fours layer on BottomView
+  }
+  
+ private func addFirstLayer() {
     
     addSubview(cardView)
     
@@ -173,8 +251,8 @@ final class NewsFeedCodeCell: UITableViewCell {
     // Icon Image View Constraints
     iconImageView.leadingAnchor.constraint(equalTo: topView.leadingAnchor).isActive = true
     iconImageView.topAnchor.constraint(equalTo: topView.topAnchor).isActive = true
-    iconImageView.heightAnchor.constraint(equalToConstant: Constants.topViewHeight).isActive = true
-    iconImageView.widthAnchor.constraint(equalToConstant: Constants.topViewHeight).isActive = true
+    iconImageView.heightAnchor.constraint(equalToConstant: 48).isActive = true
+    iconImageView.widthAnchor.constraint(equalToConstant: 48).isActive = true
     
     // Name Label Constraints
     nameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10).isActive = true
@@ -197,8 +275,72 @@ final class NewsFeedCodeCell: UITableViewCell {
   bottomView.addSubview(repostsView)
   bottomView.addSubview(viewsView)
   
+  // Likers View Constraints
+  likesView.anchor(top: bottomView.topAnchor,
+                   leading: bottomView.leadingAnchor,
+                   bottom: nil,
+                   trailing: nil,
+                   size: CGSize(width: Constants.bottomViewViewWidth,
+                                height: Constants.bottomViewViewHeight))
   
+  // Comments View Constraints
+  commentsView.anchor(top: bottomView.topAnchor,
+                      leading: likesView.trailingAnchor,
+                      bottom: nil,
+                      trailing: nil,
+                      size: CGSize(width: Constants.bottomViewViewWidth,
+                                   height: Constants.bottomViewViewHeight))
   
+  // Reposts View Constraints
+  repostsView.anchor(top: bottomView.topAnchor,
+                     leading: commentsView.trailingAnchor,
+                     bottom: nil,
+                     trailing: nil,
+                     size: CGSize(width: Constants.bottomViewViewWidth,
+                                  height: Constants.bottomViewViewHeight))
+  
+  // Views View Constraints
+  viewsView.anchor(top: bottomView.topAnchor,
+                   leading: nil,
+                   bottom: nil,
+                   trailing: bottomView.trailingAnchor,
+                   size: CGSize(width: Constants.bottomViewViewWidth,
+                                height: Constants.bottomViewViewHeight))
+  
+  }
+  
+  private func addFoursLayerOnBottomView() {
+    likesView.addSubview(likesImage)
+    likesView.addSubview(likesLabel)
+    
+    commentsView.addSubview(commentsImage)
+    commentsView.addSubview(commentsLabel)
+    
+    repostsView.addSubview(repostsImage)
+    repostsView.addSubview(repostsLabel)
+    
+    viewsView.addSubview(viewsImage)
+    viewsView.addSubview(viewsLabel)
+    
+    helpForFoursLayerViews(view: likesView, imageView: likesImage, label: likesLabel)
+    helpForFoursLayerViews(view: commentsView, imageView: commentsImage, label: commentsLabel)
+    helpForFoursLayerViews(view: repostsView, imageView: repostsImage, label: repostsLabel)
+    helpForFoursLayerViews(view: viewsView, imageView: viewsImage, label: viewsLabel)
+  }
+  
+  private func helpForFoursLayerViews(view: UIView, imageView: UIImageView, label: UILabel) {
+    
+    // Image View Constraints
+    imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+    imageView.widthAnchor.constraint(equalToConstant: Constants.bottomViewViewsIconSize).isActive = true
+    imageView.heightAnchor.constraint(equalToConstant: Constants.bottomViewViewsIconSize).isActive = true
+    
+    // Label Constraints
+    label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5).isActive = true
+    label.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
