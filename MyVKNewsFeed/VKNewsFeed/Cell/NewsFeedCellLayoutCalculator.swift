@@ -59,7 +59,7 @@ final class FeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
       attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ration)
     }
     
-    // work with botton view frame
+    // work with bottom view frame
     let bottomViewTop = max(postLabelFrame.maxY, attachmentFrame.maxY)
     
     let bottomViewFrame = CGRect(origin: CGPoint(x: 0, y: bottomViewTop),
