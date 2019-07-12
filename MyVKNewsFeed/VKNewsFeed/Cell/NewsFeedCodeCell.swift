@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
+protocol NewsFeedCodeCellDelegate: class {
+  func fullSizePost(for cell: NewsFeedCodeCell)
+}
+
 final class NewsFeedCodeCell: UITableViewCell {
   
   static let reuseId = "NewsFeedCodeCell"
+  
+  weak var delegete: NewsFeedCodeCellDelegate?
   
   // First layer element
   let cardView: UIView = {
@@ -37,6 +43,16 @@ final class NewsFeedCodeCell: UITableViewCell {
     label.font = Constants.postLabelFont
     label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     return label
+  }()
+  
+  let moreTextButton: UIButton = {
+    let button = UIButton()
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+    button.setTitleColor(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1), for: .normal)
+    button.contentHorizontalAlignment = .left
+    button.contentVerticalAlignment = .center
+    button.setTitle("Показать полностью...", for: .normal)
+    return button
   }()
   
   let postImageView: WebImageView = {
@@ -169,13 +185,25 @@ final class NewsFeedCodeCell: UITableViewCell {
     return label
   }()
   
+  override func prepareForReuse() {
+    iconImageView.setImageFromURL(imageURL: nil)
+    postImageView.setImageFromURL(imageURL: nil)
+  }
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     backgroundColor = .clear
     selectionStyle = .none
     
+    moreTextButton.addTarget(self, action: #selector(moreTextButtonTapped), for: .touchUpInside)
+    
+    
     addAllLayers()
+  }
+  
+  @objc private func moreTextButtonTapped() {
+    delegete?.fullSizePost(for: self)
   }
   
   
@@ -194,6 +222,7 @@ final class NewsFeedCodeCell: UITableViewCell {
     postLabel.frame     = viewModel.sizes.postLabelFrame
     postImageView.frame = viewModel.sizes.attachmentFrame
     bottomView.frame    = viewModel.sizes.bottomView
+    moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
     
     if let photoAttachment = viewModel.photoAttachment {
       postImageView.setImageFromURL(imageURL: photoAttachment.photoSrcString)
@@ -227,6 +256,7 @@ final class NewsFeedCodeCell: UITableViewCell {
     cardView.addSubview(postLabel)
     cardView.addSubview(postImageView)
     cardView.addSubview(bottomView)
+    cardView.addSubview(moreTextButton)
     
     // Top View Constraints
     topView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 10).isActive = true
@@ -234,12 +264,17 @@ final class NewsFeedCodeCell: UITableViewCell {
     topView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10).isActive = true
     topView.heightAnchor.constraint(equalToConstant: Constants.topViewHeight).isActive = true
     
+    // More Text Button Constraints
+    // Не нужно, так как размер задают денамически
+    
     // Post Label Constraints
+    // Не нужно, так как размер задают денамически
     
     // Post Image View Label Constraints
+    // Не нужно, так как размер задают денамически
     
     // Bottom View Constraints
-    
+    // Не нужно, так как размер задают денамически
   }
   
  private func addThirdLayerOnTopView() {

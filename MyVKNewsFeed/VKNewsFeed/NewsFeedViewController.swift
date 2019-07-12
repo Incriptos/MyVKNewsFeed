@@ -99,12 +99,21 @@ extension NewsFeedViewController: UITableViewDataSource {
     
     // Cell from Code
     let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCodeCell.reuseId, for: indexPath) as! NewsFeedCodeCell
-    
+    cell.delegete = self
     let cellViewModel = feedViewModel.cells[indexPath.row]
     cell.set(viewModel: cellViewModel)
     
     return cell
   }
   
+}
+
+// MARK: - News Feed Code Cell Delegate
+
+extension NewsFeedViewController: NewsFeedCodeCellDelegate {
+  
+  func fullSizePost(for cell: NewsFeedCodeCell) {
+    
+  }
   
 }

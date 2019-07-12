@@ -12,7 +12,7 @@ import UIKit
 struct Constants {
   static let cardInserts = UIEdgeInsets(top: 0, left: 5, bottom: 10, right: 5)
   static let topViewHeight: CGFloat = 50
-  static let postLabelInserts = UIEdgeInsets(top: 5 + Constants.topViewHeight + 5, left: 10, bottom: 7, right: 10)
+  static let postLabelInserts = UIEdgeInsets(top: 5 + Constants.topViewHeight + 10, left: 10, bottom: 7, right: 10)
   static let postLabelFont = UIFont.systemFont(ofSize: 15)
   
   static let bottomViewHeight: CGFloat = 50
@@ -21,4 +21,10 @@ struct Constants {
   static let bottomViewViewWidth: CGFloat = 80
   
   static let bottomViewViewsIconSize: CGFloat = 25
+  
+  static let minimumPostLimitLines: CGFloat = 8
+  static let minimumPostLines: CGFloat = 6
+  
+  static let moreTextButtonSize = CGSize(width: 160, height: 30)
+  static let moreTextButtonInserts = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
 }
