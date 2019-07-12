@@ -25,6 +25,6 @@ struct Constants {
   static let minimumPostLimitLines: CGFloat = 8
   static let minimumPostLines: CGFloat = 6
   
-  static let moreTextButtonSize = CGSize(width: 160, height: 30)
-  static let moreTextButtonInserts = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+  static let moreTextButtonSize = CGSize(width: 175, height: 30)
+  static let moreTextButtonInserts = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
 }

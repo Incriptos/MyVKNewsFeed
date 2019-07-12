@@ -82,6 +82,11 @@ extension NewsFeedViewController: UITableViewDelegate {
    
   }
   
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    let cellViewModel = feedViewModel.cells[indexPath.row]
+    return cellViewModel.sizes.totalHeight
+  }
+  
 }
 
 // MARK: - Table View DataSource
@@ -113,7 +118,9 @@ extension NewsFeedViewController: UITableViewDataSource {
 extension NewsFeedViewController: NewsFeedCodeCellDelegate {
   
   func fullSizePost(for cell: NewsFeedCodeCell) {
-    
+    guard let indePath = tableView.indexPath(for: cell) else { return }
+    let cellViewModel = feedViewModel.cells[indePath.row]
+    interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.openPostIds(postId: cellViewModel.postId))
   }
   
 }
