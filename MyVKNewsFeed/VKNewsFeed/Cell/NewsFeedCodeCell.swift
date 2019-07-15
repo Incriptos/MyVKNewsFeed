@@ -211,25 +211,34 @@ final class NewsFeedCodeCell: UITableViewCell {
     
     iconImageView.setImageFromURL(imageURL: viewModel.iconUrlString)
     
-    nameLabel.text      = viewModel.name
-    dateLabel.text      = viewModel.date
-    postLabel.text      = viewModel.text
-    likesLabel.text     = viewModel.likes
-    commentsLabel.text  = viewModel.comments
-    repostsLabel.text   = viewModel.reposts
-    viewsLabel.text     = viewModel.views
+    nameLabel.text       = viewModel.name
+    dateLabel.text       = viewModel.date
+    postLabel.text       = viewModel.text
+    likesLabel.text      = viewModel.likes
+    commentsLabel.text   = viewModel.comments
+    repostsLabel.text    = viewModel.reposts
+    viewsLabel.text      = viewModel.views
     
-    postLabel.frame     = viewModel.sizes.postLabelFrame
-    postImageView.frame = viewModel.sizes.attachmentFrame
-    bottomView.frame    = viewModel.sizes.bottomView
+    postLabel.frame      = viewModel.sizes.postLabelFrame
+    postImageView.frame  = viewModel.sizes.attachmentFrame
+    bottomView.frame     = viewModel.sizes.bottomView
     moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
     
-    if let photoAttachment = viewModel.photoAttachment {
+//    if let photoAttachment = viewModel.photoAttachment {
+//      postImageView.setImageFromURL(imageURL: photoAttachment.photoSrcString)
+//      postImageView.isHidden = false
+//    } else {
+//      postImageView.isHidden = true
+//    }
+    
+    if let photoAttachment = viewModel.photoAttachments.first, viewModel.photoAttachments.count == 1 {
       postImageView.setImageFromURL(imageURL: photoAttachment.photoSrcString)
       postImageView.isHidden = false
     } else {
       postImageView.isHidden = true
     }
+    
+    
     
   }
   

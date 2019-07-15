@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol FeedCellLayoutCalculatorProtocol {
-  func sizesForCell(postText: String?, photoAttachment: FeedCellPhotoAttachmentViewModel?, isFullSizedPost: Bool) -> FeedCellSizes
+  func sizesForCell(postText: String?, photoAttachments: [FeedCellPhotoAttachmentViewModel], isFullSizedPost: Bool) -> FeedCellSizes
 }
 
 struct Sizes: FeedCellSizes {
@@ -31,7 +31,7 @@ final class FeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
     self.screenWidth = screenWidth
   }
   
-  func sizesForCell(postText: String?, photoAttachment: FeedCellPhotoAttachmentViewModel?, isFullSizedPost: Bool) -> FeedCellSizes {
+  func sizesForCell(postText: String?, photoAttachments: [FeedCellPhotoAttachmentViewModel], isFullSizedPost: Bool) -> FeedCellSizes {
     
     var showMoreTextButton = false
     
@@ -76,13 +76,23 @@ final class FeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
     var attachmentFrame = CGRect(origin: CGPoint(x: 0, y: attachmentTop),
                                  size: .zero)
     
-    if let attachment = photoAttachment {
+//    if let attachment = photoAttachment {
+//      let floatPhotoHieght: Float = Float(attachment.photoHeight)
+//      let floatPhotoWidth:  Float = Float(attachment.photoWidth)
+//      let ration = CGFloat(floatPhotoHieght / floatPhotoWidth)
+//
+//      attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ration)
+//    }
+    
+    if let attachment = photoAttachments.first {
       let floatPhotoHieght: Float = Float(attachment.photoHeight)
       let floatPhotoWidth:  Float = Float(attachment.photoWidth)
       let ration = CGFloat(floatPhotoHieght / floatPhotoWidth)
-      
-      attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ration)
+      if photoAttachments.count == 1 {
+        attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ration)
+      } 
     }
+    
     
     // work with bottom view frame
     let bottomViewTop = max(postLabelFrame.maxY, attachmentFrame.maxY)
