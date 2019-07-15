@@ -45,6 +45,9 @@ final class NewsFeedCodeCell: UITableViewCell {
     return label
   }()
   
+  let photoGalleryCollectionView = GalleryCollectionView()
+
+  
   let moreTextButton: UIButton = {
     let button = UIButton()
     button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
@@ -220,10 +223,12 @@ final class NewsFeedCodeCell: UITableViewCell {
     viewsLabel.text      = viewModel.views
     
     postLabel.frame      = viewModel.sizes.postLabelFrame
-    postImageView.frame  = viewModel.sizes.attachmentFrame
+
     bottomView.frame     = viewModel.sizes.bottomView
     moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
     
+    
+    // - old version
 //    if let photoAttachment = viewModel.photoAttachment {
 //      postImageView.setImageFromURL(imageURL: photoAttachment.photoSrcString)
 //      postImageView.isHidden = false
@@ -231,11 +236,20 @@ final class NewsFeedCodeCell: UITableViewCell {
 //      postImageView.isHidden = true
 //    }
     
+    
     if let photoAttachment = viewModel.photoAttachments.first, viewModel.photoAttachments.count == 1 {
       postImageView.setImageFromURL(imageURL: photoAttachment.photoSrcString)
       postImageView.isHidden = false
+      photoGalleryCollectionView.isHidden = true
+      postImageView.frame  = viewModel.sizes.attachmentFrame
+    } else if viewModel.photoAttachments.count > 1 {
+      photoGalleryCollectionView.frame = viewModel.sizes.attachmentFrame
+      postImageView.isHidden = true
+      photoGalleryCollectionView.isHidden = false
+      photoGalleryCollectionView.set(photos: viewModel.photoAttachments)
     } else {
       postImageView.isHidden = true
+      photoGalleryCollectionView.isHidden = true
     }
     
     
@@ -264,6 +278,7 @@ final class NewsFeedCodeCell: UITableViewCell {
     cardView.addSubview(topView)
     cardView.addSubview(postLabel)
     cardView.addSubview(postImageView)
+    cardView.addSubview(photoGalleryCollectionView)
     cardView.addSubview(bottomView)
     cardView.addSubview(moreTextButton)
     
