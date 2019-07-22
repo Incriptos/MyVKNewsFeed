@@ -39,11 +39,13 @@ class RowLayout: UICollectionViewLayout {
   
   override func prepare() {
     
-    guard cache.isEmpty == true else { return }
-    guard let collectionView = collectionView else { return }
+    contentWidth = 0
+    cache = []
     
+    guard cache.isEmpty == true, let collectionView = collectionView else { return }
+    
+    // take photos
     var photo = [CGSize]()
-    
     for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
       let indexPath = IndexPath(item: item, section: 0)
       let photoSize = delegate.collectionView(collectionView, photoAtIndexPath: indexPath)
@@ -52,6 +54,7 @@ class RowLayout: UICollectionViewLayout {
     
     let superviewWidth = collectionView.frame.width
     
+    // take photo with the most lower frame
     guard let rowHeight = self.rowHeightCounter(superviewWidth: superviewWidth, photosArray: photo) else { return }
     
     let photosRatios = photo.map { $0.height / $0.width }
@@ -66,6 +69,7 @@ class RowLayout: UICollectionViewLayout {
     
     var row = 0
     
+    // add for cell frames
     for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
       let indexPath = IndexPath(item: item, section: 0)
       
