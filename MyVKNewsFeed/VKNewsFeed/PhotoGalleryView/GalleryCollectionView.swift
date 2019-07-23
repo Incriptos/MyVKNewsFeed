@@ -22,7 +22,10 @@ class GalleryCollectionView: UICollectionView {
     delegate = self
     dataSource = self
     
-    backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    backgroundColor = UIColor.white
+    
+    showsHorizontalScrollIndicator = false
+    showsVerticalScrollIndicator = false
     
     register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.reuseId)
   }
