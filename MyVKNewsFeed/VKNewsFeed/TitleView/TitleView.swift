@@ -32,7 +32,7 @@ class TitleView: UIView {
   
   addSubview(searchTextField)
   addSubview(avatarImageView)
-//  makeConstraints()
+  makeConstraints()
   
   }
   
@@ -53,7 +53,7 @@ class TitleView: UIView {
     
     
     searchTextField.anchor(top: topAnchor,
-                           leading: leftAnchor,
+                           leading: leadingAnchor,
                            bottom: bottomAnchor,
                            trailing: avatarImageView.leadingAnchor,
                            padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 12))
