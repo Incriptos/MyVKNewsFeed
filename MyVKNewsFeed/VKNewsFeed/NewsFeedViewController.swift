@@ -60,6 +60,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     tableView.backgroundColor = .clear
     view.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
     interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+    interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getUser)
   }
   
   private func setupNavigationBar() {
@@ -75,6 +76,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     case .displayNewsFeed(let feedViewModel):
       self.feedViewModel = feedViewModel
       tableView.reloadData()
+    case .displayUser(let userViewModel):
+      titleView.set(userViewModel: userViewModel)
     }
     
   }

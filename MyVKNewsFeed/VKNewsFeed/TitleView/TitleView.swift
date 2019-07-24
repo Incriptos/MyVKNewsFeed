@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol TitleViewViewModel {
+  var photoUrlString: String? { get }
+}
+
 class TitleView: UIView {
   
   private var avatarImageView: WebImageView = {
@@ -30,6 +34,10 @@ class TitleView: UIView {
   addSubview(avatarImageView)
 //  makeConstraints()
   
+  }
+  
+  func set(userViewModel: TitleViewViewModel) {
+    avatarImageView.setImageFromURL(imageURL: userViewModel.photoUrlString)
   }
   
   private func makeConstraints() {

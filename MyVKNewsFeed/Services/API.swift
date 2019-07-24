@@ -15,4 +15,6 @@ struct Api {
   static let version = "5.100"
   
   static let newsFeed = "/method/newsfeed.get"
+  
+  static let user = "/method/users.get"
 }

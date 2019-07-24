@@ -48,7 +48,7 @@ final class NetworkService: Networking {
     
     componetns.scheme = Api.scheme
     componetns.host = Api.host
-    componetns.path = Api.newsFeed
+    componetns.path = path
     componetns.queryItems = params.map { URLQueryItem(name: $0, value: $1) }
     
     return componetns.url!
