@@ -68,10 +68,10 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                     name: profile.name,
                                     date: dateTitle,
                                     text: feedItem.text,
-                                    likes: String(feedItem.likes?.count ?? 0),
-                                    comments: String(feedItem.comments?.count ?? 0),
-                                    reposts: String(feedItem.reposts?.count ?? 0),
-                                    views: String(feedItem.views?.count ?? 0),
+                                    likes: formatedCounter(feedItem.likes?.count),
+                                    comments: formatedCounter(feedItem.comments?.count),
+                                    reposts: formatedCounter(feedItem.reposts?.count),
+                                    views: formatedCounter(feedItem.views?.count),
                                     sizes: sizes)
   }
   
@@ -105,5 +105,20 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
     })
   }
   
+  private func formatedCounter(_ counter: Int?) -> String? {
+    
+    guard let counter = counter, counter > 0 else { return nil }
+    var counterStr = String(counter)
+    
+    if 4...6 ~= counterStr.count {
+      counterStr = String(counterStr.dropLast(3)) + "K"
+    } else if counterStr.count > 6 {
+      counterStr = String(counterStr.dropLast(6)) + "M"
+    }
+    
+    return counterStr
+    
+    
+  }
   
 }

@@ -61,6 +61,9 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
   }
   
   private func setupTableView() {
+    let topInsert: CGFloat = 8
+    tableView.contentInset.top = topInsert
+    
     tableView.separatorStyle = .none
     tableView.backgroundColor = .clear
     tableView.addSubview(refreshControl)

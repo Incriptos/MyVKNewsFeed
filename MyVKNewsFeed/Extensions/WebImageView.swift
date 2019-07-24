@@ -12,7 +12,11 @@ import UIKit
 
 class WebImageView: UIImageView {
   
+  private var currentUrlString: String?
+  
   func setImageFromURL(imageURL: String?) {
+    
+    currentUrlString = imageURL
     
     guard let imageURL = imageURL, let url = URL(string: imageURL) else {
       self.image = nil
@@ -28,7 +32,6 @@ class WebImageView: UIImageView {
       
       DispatchQueue.main.async {
         if let data = data, let respons = respons {
-          self?.image = UIImage(data: data)
           self?.handleLoadedImage(data: data, respons: respons)
         }
       }
@@ -41,5 +44,10 @@ class WebImageView: UIImageView {
     guard let responsURL = respons.url else { return }
     let cachedRespons = CachedURLResponse(response: respons, data: data)
     URLCache.shared.storeCachedResponse(cachedRespons, for: URLRequest(url: responsURL))
+    
+    if responsURL.absoluteString == currentUrlString {
+      self.image = UIImage(data: data)
+    }
+    
   }
 }
