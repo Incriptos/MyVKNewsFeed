@@ -41,6 +41,7 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
       presentFeed()
     case .getUser:
       fetcher.getUser { (userResponse) in
+        print(userResponse)
         self.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentUserInfo(user: userResponse))
       }
     }

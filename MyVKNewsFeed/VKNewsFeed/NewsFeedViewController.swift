@@ -16,6 +16,11 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
 
   @IBOutlet weak var tableView: UITableView!
   private var titleView = TitleView()
+  private var refreshControl: UIRefreshControl = {
+    let refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: #selector(refreshFeed), for: .valueChanged)
+    return refreshControl
+  }()
   
   var interactor: NewsFeedBusinessLogic?
   var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
@@ -38,7 +43,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
   
   // MARK: Routing
   
-
   
   // MARK: View lifecycle
   
@@ -46,21 +50,25 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     super.viewDidLoad()
     
     setup()
-   // setupNavigationBar()
     
+    setupTableView()
+    setupNavigationBar()
+  
+    view.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+    
+    interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+    interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getUser)
+  }
+  
+  private func setupTableView() {
+    tableView.separatorStyle = .none
+    tableView.backgroundColor = .clear
+    tableView.addSubview(refreshControl)
     // cell create from Xib file
     tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil),
                        forCellReuseIdentifier: NewsFeedCell.reuseId)
-    
     // cell create from Code
     tableView.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
-    
-    
-    tableView.separatorStyle = .none
-    tableView.backgroundColor = .clear
-    view.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-    interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
-    interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getUser)
   }
   
   private func setupNavigationBar() {
@@ -69,6 +77,9 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     self.navigationItem.titleView = titleView
   }
   
+  @objc private func refreshFeed() {
+    interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
+  }
   
   func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
     
@@ -76,6 +87,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     case .displayNewsFeed(let feedViewModel):
       self.feedViewModel = feedViewModel
       tableView.reloadData()
+      refreshControl.endRefreshing()
     case .displayUser(let userViewModel):
       titleView.set(userViewModel: userViewModel)
     }

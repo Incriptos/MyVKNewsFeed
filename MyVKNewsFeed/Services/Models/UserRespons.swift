@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct UserResponseWrapped: Decodable {
   let response: [UserResponse]
 }

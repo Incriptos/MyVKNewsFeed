@@ -67,7 +67,7 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                     iconUrlString: profile.photo,
                                     name: profile.name,
                                     date: dateTitle,
-                                    text: String(feedItem.text!),
+                                    text: feedItem.text,
                                     likes: String(feedItem.likes?.count ?? 0),
                                     comments: String(feedItem.comments?.count ?? 0),
                                     reposts: String(feedItem.reposts?.count ?? 0),
