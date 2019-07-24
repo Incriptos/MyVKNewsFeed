@@ -15,6 +15,7 @@ protocol NewsFeedDisplayLogic: class {
 class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
 
   @IBOutlet weak var tableView: UITableView!
+  private var titleView = TitleView()
   
   var interactor: NewsFeedBusinessLogic?
   var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
@@ -45,6 +46,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     super.viewDidLoad()
     
     setup()
+   // setupNavigationBar()
     
     // cell create from Xib file
     tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil),
@@ -59,6 +61,13 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     view.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
     interactor?.makeRequest(request: NewsFeed.Model.Request.RequestType.getNewsFeed)
   }
+  
+  private func setupNavigationBar() {
+    self.navigationController?.hidesBarsOnSwipe = true
+    self.navigationController?.navigationBar.shadowImage = UIImage()
+    self.navigationItem.titleView = titleView
+  }
+  
   
   func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
     
