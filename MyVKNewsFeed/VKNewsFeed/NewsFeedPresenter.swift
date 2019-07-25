@@ -46,15 +46,12 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
   private func cellViewModel(from feedItem: FeedItem, profiles: [Profile], groups: [Group], openPostIds: [Int]) -> FeedViewModel.Cell {
     
     let profile = self.profile(for: feedItem.sourceId, profiles: profiles, groups: groups)
-    
-   // let photoAttachment = self.photoAttachment(feedItem: feedItem)
-    
+        
     let photoAttachments = self.photoAttachments(feedItem: feedItem)
     
     let date = Date(timeIntervalSince1970: feedItem.date)
     let dateTitle = dateFormatter.string(from: date)
     
-   
     let isFullSized = openPostIds.contains { (postId)  in
       return postId == feedItem.postId
     }
@@ -118,7 +115,6 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
     }
     
     return counterStr
-    
     
   }
   

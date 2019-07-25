@@ -16,40 +16,29 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
 
   var presenter: NewsFeedPresentationLogic?
   var service: NewsFeedService?
-  private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
-  
-  private var openPostsIds = [Int]()
-  private var feedRespons: FeedResponse?
-  
+ 
   func makeRequest(request: NewsFeed.Model.Request.RequestType) {
     if service == nil {
       service = NewsFeedService()
-    }
-    
-    switch request {
-  
-    case .getNewsFeed:
-      fetcher.getFeed { [weak self] (feedRespons) in
-  
-        self?.feedRespons = feedRespons
-        self?.presentFeed()
-        
-      }
       
-    case .openPostIds(let postId):
-      openPostsIds.append(postId)
-      presentFeed()
-    case .getUser:
-      fetcher.getUser { (userResponse) in
-        print(userResponse)
-        self.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentUserInfo(user: userResponse))
+      switch request {
+        
+      case .getNewsFeed:
+        service?.getFeed(completion: { [weak self] (openPostIds, feed) in
+          self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentNewsFeed(feed: feed, openPostIds: openPostIds))
+        })
+        
+      case .getUser:
+        service?.getUser(completion: { [weak self] (user) in
+          self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentUserInfo(user: user))
+        })
+        
+      case .openPostIds(let postId):
+        service?.openPostIds(forPostId: postId, completion: { [weak self] (openPostIds, feed) in
+          self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentNewsFeed(feed: feed, openPostIds: openPostIds))
+        })
       }
     }
   }
   
-  private func presentFeed() {
-    guard let feedRespons = self.feedRespons else { return }
-    presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentNewsFeed(feed: feedRespons,
-                                                                                        openPostIds: openPostsIds))
-  }
 }
