@@ -29,6 +29,7 @@ class RowLayout: UICollectionViewLayout {
   fileprivate var contentHeight: CGFloat {
     
     guard let collectionView = collectionView else { return 0 }
+    
     let insets = collectionView.contentInset
     return collectionView.bounds.height - (insets.left + insets.right)
   }
@@ -76,17 +77,18 @@ class RowLayout: UICollectionViewLayout {
       let indexPath = IndexPath(item: item, section: 0)
       
       let ratio = photosRatios[indexPath.row]
-      let width = rowHeight / ratio
+      let width = (rowHeight / ratio)
       
       let frame = CGRect(x: XOffset[row], y: YOffset[row], width: width, height: rowHeight)
-      let insertFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+      let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
       
-      let atribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-      atribute.frame = insertFrame
-      cache.append(atribute)
+      let attribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+      attribute.frame = insetFrame
+      cache.append(attribute)
+      
       contentWidth = max(contentWidth, frame.maxX)
       XOffset[row] = XOffset[row] + width
-      row = row < (RowLayout.numberOfRows - 1) ? (row - 1) : 0
+      row = row < (RowLayout.numberOfRows - 1) ? (row + 1) : 0
       
     }
     
