@@ -94,7 +94,6 @@ class RowLayout: UICollectionViewLayout {
     
   }
   
-  
   static func rowHeightCounter(superviewWidth: CGFloat, photosArray: [CGSize]) -> CGFloat? {
     
     var rowHeight: CGFloat
