@@ -16,6 +16,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
 
   @IBOutlet weak var tableView: UITableView!
   private var titleView = TitleView()
+  private lazy var footerView = FooterView()
+  
   private var refreshControl: UIRefreshControl = {
     let refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: #selector(refreshFeed), for: .valueChanged)
@@ -25,7 +27,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
   var interactor: NewsFeedBusinessLogic?
   var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
   
-  private var feedViewModel = FeedViewModel.init(cells: [])
+  private var feedViewModel = FeedViewModel.init(cells: [], footerTitle: nil)
   
   // MARK: Setup
   
@@ -67,6 +69,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     tableView.separatorStyle = .none
     tableView.backgroundColor = .clear
     tableView.addSubview(refreshControl)
+    tableView.tableFooterView = footerView
+    
     // cell create from Xib file
     tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil),
                        forCellReuseIdentifier: NewsFeedCell.reuseId)
@@ -90,9 +94,12 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     case .displayNewsFeed(let feedViewModel):
       self.feedViewModel = feedViewModel
       tableView.reloadData()
+      footerView.setTitle(feedViewModel.footerTitle)
       refreshControl.endRefreshing()
     case .displayUser(let userViewModel):
       titleView.set(userViewModel: userViewModel)
+    case .displayfooterLoader:
+      footerView.showLoader()
     }
     
   }
