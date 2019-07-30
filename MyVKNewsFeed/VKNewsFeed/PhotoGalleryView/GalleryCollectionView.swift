@@ -28,11 +28,6 @@ class GalleryCollectionView: UICollectionView {
     showsVerticalScrollIndicator = false
     
     register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.reuseId)
-    
-    if let rowLayout = collectionViewLayout as? RowLayout {
-      rowLayout.delegate = self
-    }
-    
   }
   
   func set(photos: [FeedCellPhotoAttachmentViewModel]) {
