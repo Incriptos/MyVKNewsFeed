@@ -20,7 +20,7 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
 
   let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.locale = Locale(identifier: "ua_UA")
+    dateFormatter.locale = Locale(identifier: "ru_RU")
     dateFormatter.dateFormat = "d MM 'в' HH:mm:"
     return dateFormatter
   }()
@@ -34,7 +34,9 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         cellViewModel(from: feedItem, profiles: feed.profiles, groups: feed.groups, openPostIds: openPostIds)
       }
       
-      let feedViewModel = FeedViewModel.init(cells: cells, footerTitle: "\(cells.count) записей")
+      let footerTitle = String.localizedStringWithFormat(NSLocalizedString("newsfeed cells count", comment: ""), cells.count)
+      
+      let feedViewModel = FeedViewModel.init(cells: cells, footerTitle: footerTitle)
 
       viewController?.displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData.displayNewsFeed(feedViewModel: feedViewModel))
       

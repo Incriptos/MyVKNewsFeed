@@ -19,6 +19,8 @@
 		83266D9922CA9B4900FCD260 /* NewsFeedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83266D9222CA9B4900FCD260 /* NewsFeedModels.swift */; };
 		83266D9A22CA9B4900FCD260 /* NewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83266D9322CA9B4900FCD260 /* NewsFeedViewController.swift */; };
 		83266D9B22CA9B4900FCD260 /* NewsFeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83266D9422CA9B4900FCD260 /* NewsFeedInteractor.swift */; };
+		8347143422F0DFE7000A0F88 /* Localizable.stringdict.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8347143322F0DFE7000A0F88 /* Localizable.stringdict.stringsdict */; };
+		8347143622F0F88B000A0F88 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347143522F0F88B000A0F88 /* GradientView.swift */; };
 		8365972D22CD088100D3F4A3 /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8365972C22CD088100D3F4A3 /* WebImageView.swift */; };
 		8365972F22CE5CF600D3F4A3 /* NewsFeedCellLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8365972E22CE5CF600D3F4A3 /* NewsFeedCellLayoutCalculator.swift */; };
 		8365973122CFB33100D3F4A3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8365973022CFB33100D3F4A3 /* String.swift */; };
@@ -57,6 +59,8 @@
 		83266D9222CA9B4900FCD260 /* NewsFeedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedModels.swift; sourceTree = "<group>"; };
 		83266D9322CA9B4900FCD260 /* NewsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewController.swift; sourceTree = "<group>"; };
 		83266D9422CA9B4900FCD260 /* NewsFeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedInteractor.swift; sourceTree = "<group>"; };
+		8347143322F0DFE7000A0F88 /* Localizable.stringdict.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringdict.stringsdict; sourceTree = "<group>"; };
+		8347143522F0F88B000A0F88 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8365972C22CD088100D3F4A3 /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
 		8365972E22CE5CF600D3F4A3 /* NewsFeedCellLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCellLayoutCalculator.swift; sourceTree = "<group>"; };
 		8365973022CFB33100D3F4A3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -104,6 +108,15 @@
 				830D7C0C22DD0F15008E5750 /* GalleryCollectionViewCell.swift */,
 			);
 			path = PhotoGalleryView;
+			sourceTree = "<group>";
+		};
+		8347143722F0FC3F000A0F88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8365972C22CD088100D3F4A3 /* WebImageView.swift */,
+				8347143522F0F88B000A0F88 /* GradientView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8365972A22CCE59B00D3F4A3 /* Auth */ = {
@@ -195,6 +208,7 @@
 				83FCFDC622CA34D90016DCB1 /* Services */,
 				8365972A22CCE59B00D3F4A3 /* Auth */,
 				83CA2FC422CA99F300DB9BCF /* VKNewsFeed */,
+				8347143722F0FC3F000A0F88 /* Views */,
 				83FCFDD222CA4C110016DCB1 /* SupportFiles */,
 				83FCFDD122CA4BFD0016DCB1 /* Extensions */,
 			);
@@ -225,7 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				83FCFDCF22CA48230016DCB1 /* UIViewController.swift */,
-				8365972C22CD088100D3F4A3 /* WebImageView.swift */,
 				8365973022CFB33100D3F4A3 /* String.swift */,
 				830D7C0522D68445008E5750 /* Constraints.swift */,
 			);
@@ -238,6 +251,7 @@
 				83FCFDD722CA55B90016DCB1 /* .gitignore */,
 				83FCFDB522CA20CA0016DCB1 /* Assets.xcassets */,
 				83FCFDBA22CA20CA0016DCB1 /* Info.plist */,
+				8347143322F0DFE7000A0F88 /* Localizable.stringdict.stringsdict */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -312,6 +326,7 @@
 			files = (
 				83A89A6D22CC050600EB77B0 /* NewsFeedViewController.storyboard in Resources */,
 				83FCFDD822CA55B90016DCB1 /* .gitignore in Resources */,
+				8347143422F0DFE7000A0F88 /* Localizable.stringdict.stringsdict in Resources */,
 				83A89A6B22CBD05E00EB77B0 /* NewsFeedCell.xib in Resources */,
 				83FCFDCA22CA39890016DCB1 /* LoginViewController.storyboard in Resources */,
 				83FCFDB922CA20CA0016DCB1 /* LaunchScreen.storyboard in Resources */,
@@ -373,6 +388,7 @@
 				83266D9922CA9B4900FCD260 /* NewsFeedModels.swift in Sources */,
 				83A89A6922CBCFB000EB77B0 /* NewsFeedCell.swift in Sources */,
 				830D7C0B22DD0D9F008E5750 /* GalleryCollectionView.swift in Sources */,
+				8347143622F0F88B000A0F88 /* GradientView.swift in Sources */,
 				83266D9A22CA9B4900FCD260 /* NewsFeedViewController.swift in Sources */,
 				8365972F22CE5CF600D3F4A3 /* NewsFeedCellLayoutCalculator.swift in Sources */,
 			);
