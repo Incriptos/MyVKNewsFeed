@@ -39,7 +39,7 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
         })
       case .getNextPostsBatch:
         self.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentFooterLoader)
-        service?.getNextPostBatch(completion: { [weak self] (openPostIds, feed) in
+        service?.getNextPostsBatch(completion: { [weak self] (openPostIds, feed) in
           self?.presenter?.presentData(response: NewsFeed.Model.Response.ResponseType.presentNewsFeed(feed: feed, openPostIds: openPostIds))
         })
       }

@@ -44,7 +44,7 @@ class NewsFeedService {
     completion(openPostsIds, feedResponse)
   }
   
-  func getNextPostBatch(completion: @escaping ([Int], FeedResponse) -> Void) {
+  func getNextPostsBatch(completion: @escaping ([Int], FeedResponse) -> Void) {
    newFromInProcess = feedResponse?.nextFrom
     fetcher.getFeed(nextBatchFrom: newFromInProcess) { [weak self] (feed) in
       guard let feed = feed else { return }

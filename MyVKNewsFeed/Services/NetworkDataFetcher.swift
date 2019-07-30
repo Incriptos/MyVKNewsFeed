@@ -28,6 +28,7 @@ struct NetworkDataFetcher: DataFetcher {
     
     var params = ["filters": "post, photo"]
     params["start_from"] = nextBatchFrom
+    
     networking.request(path: Api.newsFeed, params: params) { (data, error) in
       if let error = error {
         print("Error received requesting data: \(error.localizedDescription)")
@@ -53,8 +54,6 @@ struct NetworkDataFetcher: DataFetcher {
       response(decoded?.response.first)
     }
   }
-  
-  
   
   private func decodeJSON<T: Decodable>(type: T.Type, from: Data?) -> T? {
     let decoder = JSONDecoder()
