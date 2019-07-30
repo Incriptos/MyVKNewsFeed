@@ -18,7 +18,7 @@ class RowLayout: UICollectionViewLayout {
   
   weak var delegate: RowLayoutDelegate!
   
-  static var numberOfRows = 2
+  static var numberOfRows = 1
   fileprivate var cellPadding: CGFloat = 8
   
   fileprivate var cache = [UICollectionViewLayoutAttributes]()
@@ -76,17 +76,19 @@ class RowLayout: UICollectionViewLayout {
       let indexPath = IndexPath(item: item, section: 0)
       
       let ratio = photosRatios[indexPath.row]
-      let width = rowHeight / ratio
+      let width = (rowHeight / ratio)
       
       let frame = CGRect(x: XOffset[row], y: YOffset[row], width: width, height: rowHeight)
-      let insertFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+      let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+      
       
       let atribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-      atribute.frame = insertFrame
+      atribute.frame = insetFrame
       cache.append(atribute)
       contentWidth = max(contentWidth, frame.maxX)
+      
       XOffset[row] = XOffset[row] + width
-      row = row < (RowLayout.numberOfRows - 1) ? (row - 1) : 0
+      row = row < (RowLayout.numberOfRows - 1) ? (row + 1) : 0
       
     }
     
