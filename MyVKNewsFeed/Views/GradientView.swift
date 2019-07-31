@@ -35,8 +35,6 @@ class GradientView: UIView {
     
     setupGradient()
     
-    
-    fatalError("init(coder:) has not been implemented")
   }
   
   
